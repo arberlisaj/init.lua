@@ -11,7 +11,7 @@ return {
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
     "j-hui/fidget.nvim",
-    "jose-elias-alvarez/null-ls.nvim", -- Add null-ls here
+    "jose-elias-alvarez/null-ls.nvim",
   },
 
   config = function()
@@ -37,11 +37,6 @@ return {
         function(server_name) -- default handler (optional)
           require("lspconfig")[server_name].setup {
             capabilities = capabilities,
-            --on_attach = function(client, bufnr)
-            --if client.server_capabilities.documentFormattingProvider then
-            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', { noremap = true, silent = true })
-            --end
-            --end,
           }
         end,
 
@@ -96,17 +91,10 @@ return {
       },
     })
 
-    -- Configure null-ls
     null_ls.setup({
       sources = {
         null_ls.builtins.formatting.prettier,
       },
-      on_attach = function(client, bufnr)
-        --if client.server_capabilities.documentFormattingProvider then
-        -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>',
-        --  { noremap = true, silent = true })
-        --end
-      end,
     })
   end
 }

@@ -12,7 +12,7 @@ return {
       vim.keymap.set("n", "<leader>j", function() ui.nav_file(1) end)
       vim.keymap.set("n", "<leader>k", function() ui.nav_file(2) end)
       vim.keymap.set("n", "<leader>l", function() ui.nav_file(3) end)
-      vim.keymap.set("n", "<leader>0", function() ui.nav_file(4) end)
+      vim.keymap.set("n", "<leader>o", function() ui.nav_file(4) end)
     end,
   },
 }
