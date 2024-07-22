@@ -47,6 +47,11 @@ vim.keymap.set("n", "<leader>q", function()
   vim.cmd("q!")
 end)
 
+-- Organize imports
+vim.keymap.set("n", "<leader><CR>", function()
+  vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } })
+end)
+
 -- Execute current file based on its extension
 function Execute()
   local current_file = vim.fn.expand('%')
