@@ -9,6 +9,9 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- Clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- Move highlighted line
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
