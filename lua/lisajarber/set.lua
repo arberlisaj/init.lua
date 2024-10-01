@@ -29,4 +29,15 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
--- vim.opt.colorcolumn = "80"
+
+-- Markdown
+vim.api.nvim_create_augroup("MarkdownTextAutoWidth", {clear = true})
+vim.api.nvim_create_autocmd("FileType", {
+  group = "MarkdownTextAutoWidth",
+  pattern = {"markdown", "text"},
+  callback = function()
+    vim.opt_local.wrap = true       -- Enable wrap
+    vim.opt_local.textwidth = 0     -- Set textwidth to 0 (unlimited)
+    vim.opt_local.linebreak = true  -- Prevent breaking words
+  end
+})
