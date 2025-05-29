@@ -11,13 +11,11 @@ return {
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
     "j-hui/fidget.nvim",
-    "jose-elias-alvarez/null-ls.nvim",
   },
 
   config = function()
     local cmp = require('cmp')
     local cmp_lsp = require("cmp_nvim_lsp")
-    local null_ls = require("null-ls")
     local capabilities = vim.tbl_deep_extend(
       "force",
       {},
@@ -66,7 +64,6 @@ return {
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
       }),
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -85,12 +82,6 @@ return {
         source = "always",
         header = "",
         prefix = "",
-      },
-    })
-
-    null_ls.setup({
-      sources = {
-        null_ls.builtins.formatting.prettier,
       },
     })
   end
