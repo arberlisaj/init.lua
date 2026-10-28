@@ -41,7 +41,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- Organize imports
 vim.keymap.set("n", "<leader><CR>", function()
-  vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } })
+  vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
 end)
 
 -- Save

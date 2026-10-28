@@ -7,19 +7,19 @@ return {
 
         -- Install parsers
         require("nvim-treesitter").install({
-            "vimdoc", "javascript", "typescript", "c", "lua", "rust",
+            "vimdoc", "javascript", "typescript", "tsx", "c", "lua", "rust",
             "jsdoc", "bash",
         })
 
-        -- Register templ as a custom parser
-        vim.treesitter.language.register("templ", "templ")
-
         -- Enable highlighting and indent per-filetype via autocmd
+        -- (filetype names, not parser names: e.g. sh uses the bash parser)
         vim.api.nvim_create_autocmd("FileType", {
-            pattern = { "vimdoc", "javascript", "typescript", "c", "lua", "rust", "jsdoc", "bash", "templ" },
+            pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact", "c", "lua", "rust", "sh" },
             callback = function()
-                vim.treesitter.start()
-                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                -- Fails if the parser is missing (e.g. still installing on first launch)
+                if pcall(vim.treesitter.start) then
+                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end
             end,
         })
     end
