@@ -3,6 +3,7 @@ return {
     "L3MON4D3/LuaSnip",
     version = "v2.*",
     build = "make install_jsregexp",
+    event = "InsertEnter",
 
     dependencies = { "rafamadriz/friendly-snippets" },
 
@@ -34,6 +35,7 @@ return {
   },
   {
     "windwp/nvim-ts-autotag",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require('nvim-ts-autotag').setup()
     end,

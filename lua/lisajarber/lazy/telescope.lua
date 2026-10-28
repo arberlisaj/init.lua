@@ -1,22 +1,20 @@
 return {
   "nvim-telescope/telescope.nvim",
-
-  tag = "0.1.5",
-
+  branch = "master", -- was: tag = "0.1.5"
   dependencies = {
     "nvim-lua/plenary.nvim"
   },
-
+  cmd = "Telescope",
+  keys = {
+    { '<leader>p', function() require('telescope.builtin').find_files() end },
+    { '<C-p>', function() require('telescope.builtin').git_files() end },
+    { '<leader>cmd', function() require('telescope.builtin').help_tags() end },
+    { '<leader>gr', function()
+      local word = vim.fn.expand("<cword>")
+      require('telescope.builtin').grep_string({ search = word })
+    end },
+  },
   config = function()
     require('telescope').setup({})
-
-    local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>p', builtin.find_files, {})
-    vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-    vim.keymap.set('n', '<leader>cmd', builtin.help_tags, {})
-    vim.keymap.set('n', '<leader>gr', function()
-      local word = vim.fn.expand("<cword>")
-      builtin.grep_string({ search = word })
-    end)
   end
 }

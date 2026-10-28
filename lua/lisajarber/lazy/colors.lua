@@ -16,7 +16,6 @@ return {
         italic = false,
       },
     })
-    vim.cmd("colorscheme rose-pine")
     Color()
   end
 }

@@ -24,6 +24,11 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-k>", "<C-u>zz")
 vim.keymap.set("n", "<C-j>", "<C-d>zz")
 
+-- Jump from a terminal (e.g. Claude) to the window on the left
+vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]])
+-- Jump back to the window on the right (Claude enters terminal mode on its own)
+vim.keymap.set("n", "<C-l>", "<C-w>l")
+
 -- Next & previous word
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")

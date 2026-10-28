@@ -1,7 +1,5 @@
 return {
-  {
-    "nvim-lua/plenary.nvim",
-    name = "plenary"
-  },
-  "eandrju/cellular-automaton.nvim",
+  -- Loaded on demand by the plugins that depend on it
+  { "nvim-lua/plenary.nvim", lazy = true },
+  { "eandrju/cellular-automaton.nvim", cmd = "CellularAutomaton" },
 }

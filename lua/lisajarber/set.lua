@@ -30,6 +30,33 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
+-- Reload buffers changed outside nvim (e.g. by Claude)
+vim.opt.autoread = true
+vim.api.nvim_create_augroup("AutoRead", {clear = true})
+vim.api.nvim_create_autocmd({"FocusGained", "BufEnter", "CursorHold", "TermLeave"}, {
+  group = "AutoRead",
+  callback = function()
+    if vim.fn.mode() ~= "c" and vim.fn.getcmdwintype() == "" then
+      vim.cmd("checktime")
+    end
+  end
+})
+
+-- Also check every second, since none of the events above fire while you stay
+-- in a terminal (e.g. Claude). Buffers with unsaved changes are skipped so no
+-- reload prompt pops up while you're typing.
+local autoread_timer = vim.uv.new_timer()
+autoread_timer:start(1000, 1000, vim.schedule_wrap(function()
+  if vim.fn.mode() == "c" or vim.fn.getcmdwintype() ~= "" then
+    return
+  end
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buftype == "" and not vim.bo[buf].modified then
+      vim.cmd("checktime " .. buf)
+    end
+  end
+end))
+
 -- Markdown
 vim.api.nvim_create_augroup("MarkdownTextAutoWidth", {clear = true})
 vim.api.nvim_create_autocmd("FileType", {

@@ -1,7 +1,10 @@
 return {
   {
     'ThePrimeagen/harpoon',
-    requires = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    -- Load right after startup (not on first keypress) so it keeps
+    -- tracking cursor positions in marked files from the start
+    event = "VeryLazy",
     config = function()
       local mark = require("harpoon.mark")
       local ui = require("harpoon.ui")
